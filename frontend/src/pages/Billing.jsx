@@ -131,7 +131,7 @@ export default function Billing() {
   const currentPlan = plans.find((p) => p.key === billing.currentPlan);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
         <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
           Billing & Subscription
@@ -142,7 +142,7 @@ export default function Billing() {
       </div>
 
       {!billing.configured && (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 text-xs text-amber-800 flex items-center gap-3">
+        <div className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 text-xs text-amber-800 flex items-start gap-3 sm:items-center">
           <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0" />
           <span>
             Payment gateway in setup mode. Add Razorpay API credentials in backend environment to accept live payments.
@@ -153,7 +153,7 @@ export default function Billing() {
       {/* Current Plan Overview Card */}
       <div className="card relative overflow-hidden flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between border-brand-200/80 bg-gradient-to-r from-white via-white to-brand-50/30">
         <div className="space-y-1">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Current Plan</span>
             <span className="badge badge-brand">
               {currentPlan?.name || "Free"} Tier
@@ -165,8 +165,8 @@ export default function Billing() {
           </p>
 
           {billing.currentPlan !== "free" && (
-            <p className="text-xs font-medium text-slate-600 flex items-center gap-1.5 pt-1">
-              <Calendar className="h-3.5 w-3.5 text-brand-600" />
+            <p className="text-xs font-medium text-slate-600 flex items-start gap-1.5 pt-1 sm:items-center">
+              <Calendar className="h-3.5 w-3.5 flex-shrink-0 text-brand-600" />
               {sub?.cancelAtPeriodEnd || ["cancelled", "halted", "completed"].includes(sub?.status)
                 ? `Access remains active until ${formatDate(billing.planExpiresAt)}`
                 : `Renews automatically on ${formatDate(sub?.currentEnd)}`}
@@ -181,8 +181,8 @@ export default function Billing() {
           )}
 
           {sub?.status === "halted" && (
-            <p className="mt-2 text-xs font-semibold text-rose-600 flex items-center gap-1">
-              <XCircle className="h-3.5 w-3.5" />
+            <p className="mt-2 text-xs font-semibold text-rose-600 flex items-start gap-1 sm:items-center">
+              <XCircle className="h-3.5 w-3.5 flex-shrink-0" />
               Auto-debit failed. Please re-subscribe to maintain uninterrupted active link routing.
             </p>
           )}
@@ -200,7 +200,7 @@ export default function Billing() {
       </div>
 
       {/* Plan Cards Grid */}
-      <div className="grid gap-6 md:grid-cols-3 items-stretch">
+      <div className="grid gap-8 md:grid-cols-3 md:gap-6 items-stretch">
         {plans.map((p) => {
           const isCurrent = p.key === billing.currentPlan;
           const isStarter = p.key === "starter";
@@ -209,7 +209,7 @@ export default function Billing() {
           return (
             <div
               key={p.key}
-              className={`relative flex flex-col justify-between rounded-3xl border bg-white p-7 transition-all ${
+              className={`relative flex flex-col justify-between rounded-3xl border bg-white p-6 sm:p-7 transition-all ${
                 isStarter
                   ? "border-brand-500 shadow-xl shadow-brand-500/10 ring-2 ring-brand-500/20"
                   : isCurrent
@@ -218,7 +218,7 @@ export default function Billing() {
               }`}
             >
               {isStarter && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-600 to-indigo-600 px-3.5 py-0.5 text-xs font-bold text-white shadow-md">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-600 to-indigo-600 px-3.5 py-0.5 text-xs font-bold whitespace-nowrap text-white shadow-md">
                   ⭐ Recommended
                 </div>
               )}
@@ -301,12 +301,12 @@ export default function Billing() {
         })}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 rounded-xl bg-slate-100/70 p-3.5 gap-2">
-        <span className="flex items-center gap-1.5">
-          <ShieldCheck className="h-4 w-4 text-emerald-600" />
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-slate-500 rounded-xl bg-slate-100/70 p-3.5 gap-2">
+        <span className="flex items-start gap-1.5 sm:items-center">
+          <ShieldCheck className="h-4 w-4 flex-shrink-0 text-emerald-600" />
           Prices in INR. Billed monthly via UPI Autopay, Cards or Netbanking with instant activation.
         </span>
-        <Link to="/refund" className="font-semibold text-brand-600 hover:underline">
+        <Link to="/refund" className="flex-shrink-0 font-semibold text-brand-600 hover:underline">
           View Refund Policy →
         </Link>
       </div>
@@ -323,8 +323,8 @@ export default function Billing() {
             No payments recorded yet under this account.
           </p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+            <table className="w-full min-w-[560px] whitespace-nowrap text-left text-xs [&_td]:pr-4 [&_th]:pr-4">
               <thead className="text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-100">
                 <tr>
                   <th className="py-2.5">Date</th>

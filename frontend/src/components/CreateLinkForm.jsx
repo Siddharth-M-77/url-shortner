@@ -122,7 +122,7 @@ export default function CreateLinkForm({ onCreated }) {
       </div>
 
       {/* Options Accordion Toggle */}
-      <div className="flex items-center justify-between pt-1">
+      <div className="flex flex-wrap items-center justify-between gap-2 pt-3">
         <button
           type="button"
           onClick={() => setShowOptions((v) => !v)}
@@ -133,7 +133,7 @@ export default function CreateLinkForm({ onCreated }) {
         </button>
 
         {form.customAlias && (
-          <span className="text-xs font-mono text-slate-500 truncate max-w-xs">
+          <span className="min-w-0 max-w-full truncate text-xs font-mono text-slate-500 sm:max-w-xs">
             Preview: <strong className="text-brand-700">/{form.customAlias}</strong>
           </span>
         )}

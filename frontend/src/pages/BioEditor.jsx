@@ -117,12 +117,12 @@ export default function BioEditor() {
   const publicUrl = savedUsername ? `${window.location.origin}/u/${savedUsername}` : "";
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1fr_390px] items-start">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_390px] items-start">
       {/* Left Settings Form */}
-      <form onSubmit={handleSave} className="space-y-6">
+      <form onSubmit={handleSave} className="min-w-0 space-y-6">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">
               Customize Your Bio Page
             </h1>
             <span className="badge badge-brand">
@@ -134,23 +134,23 @@ export default function BioEditor() {
           </p>
 
           {publicUrl && (
-            <div className="mt-3 flex items-center justify-between rounded-xl border border-brand-200 bg-brand-50/80 px-4 py-2.5 shadow-2xs">
-              <div className="flex items-center gap-2 text-xs">
-                <span className="font-semibold text-brand-900">Your Public URL:</span>
+            <div className="mt-3 flex flex-col gap-2 rounded-xl border border-brand-200 bg-brand-50/80 px-4 py-2.5 shadow-2xs sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 flex-col gap-0.5 text-xs sm:flex-row sm:items-center sm:gap-2">
+                <span className="flex-shrink-0 font-semibold text-brand-900">Your Public URL:</span>
                 <a
                   href={publicUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-mono font-bold text-brand-700 hover:underline flex items-center gap-1"
+                  className="flex min-w-0 items-center gap-1 font-mono font-bold text-brand-700 hover:underline"
                 >
-                  <span>{publicUrl}</span>
-                  <ExternalLink className="h-3 w-3" />
+                  <span className="break-all">{publicUrl}</span>
+                  <ExternalLink className="h-3 w-3 flex-shrink-0" />
                 </a>
               </div>
               <button
                 type="button"
                 onClick={handleCopyPublicUrl}
-                className="btn-ghost py-1 px-2.5 text-xs bg-white cursor-pointer"
+                className="btn-ghost self-start py-1 px-2.5 text-xs bg-white cursor-pointer sm:self-auto sm:flex-shrink-0"
               >
                 {copied ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
                 <span>{copied ? "Copied" : "Copy"}</span>
@@ -291,7 +291,7 @@ export default function BioEditor() {
 
         {/* Links Manager Card */}
         <div className="card space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
             <h2 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
               <Link2 className="h-4 w-4 text-brand-600" />
               Links & Catalog Items ({form.links.length}/20)
@@ -402,7 +402,7 @@ export default function BioEditor() {
           </div>
 
           {/* Screen Content */}
-          <div className="h-[620px] overflow-y-auto rounded-[2.2rem] bg-white scrollbar-none">
+          <div className="h-[560px] sm:h-[620px] overflow-y-auto rounded-[2.2rem] bg-white scrollbar-none">
             <BioView
               page={{ ...form, username: form.username || "yourshop" }}
               compact

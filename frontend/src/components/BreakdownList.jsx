@@ -61,12 +61,12 @@ export default function BreakdownList({ title, items = [] }) {
 
               return (
                 <li key={item.key} className="space-y-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="flex items-center gap-1.5 font-medium text-slate-700 capitalize">
-                      <Icon className="h-3.5 w-3.5 text-slate-400" />
-                      <span className="truncate max-w-[150px]">{item.key || "Direct / Unknown"}</span>
+                  <div className="flex items-center justify-between gap-3 text-xs">
+                    <span className="flex min-w-0 items-center gap-1.5 font-medium text-slate-700 capitalize">
+                      <Icon className="h-3.5 w-3.5 flex-shrink-0 text-slate-400" />
+                      <span className="truncate">{item.key || "Direct / Unknown"}</span>
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-shrink-0 items-center gap-2">
                       <span className="font-bold text-slate-900">
                         {item.count.toLocaleString("en-IN")}
                       </span>

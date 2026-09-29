@@ -96,22 +96,22 @@ export default function Landing() {
   };
 
   return (
-    <div className="space-y-24 py-4 sm:py-8">
+    <div className="space-y-16 py-2 sm:space-y-24 sm:py-8">
       {/* Hero Section */}
       <section className="relative text-center">
         {/* Glowing Announcement Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-brand-200/80 bg-white/90 px-4 py-1.5 shadow-sm backdrop-blur-md transition-transform hover:scale-105">
-          <span className="flex h-2 w-2 rounded-full bg-brand-600 animate-pulse" />
-          <span className="text-xs font-semibold text-brand-900">
+        <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-brand-200/80 bg-white/90 px-3 py-1.5 sm:px-4 shadow-sm backdrop-blur-md transition-transform hover:scale-105">
+          <span className="flex h-2 w-2 flex-shrink-0 rounded-full bg-brand-600 animate-pulse" />
+          <span className="text-[11px] font-semibold text-brand-900 sm:text-xs">
             ⚡ Made specifically for Indian Creators & D2C Sellers
           </span>
-          <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[10px] font-bold text-brand-700">
+          <span className="hidden rounded-full bg-brand-50 px-2 py-0.5 text-[10px] font-bold text-brand-700 sm:inline">
             v2.0
           </span>
         </div>
 
         {/* Hero Title */}
-        <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl sm:leading-[1.15]">
+        <h1 className="mx-auto mt-6 max-w-4xl text-[2rem] leading-tight font-extrabold sm:text-6xl sm:leading-[1.15] tracking-tight text-slate-900">
           Turn Every Single Click Into{" "}
           <span className="bg-gradient-to-r from-brand-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
             Paying Customers
@@ -119,7 +119,7 @@ export default function Landing() {
         </h1>
 
         {/* Hero Subtitle */}
-        <p className="mx-auto mt-6 max-w-2xl text-base text-slate-600 sm:text-lg leading-relaxed">
+        <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-600 sm:mt-6 sm:text-lg leading-relaxed">
           Supercharge your brand with ultra-fast short links, print-ready QR codes, and a gorgeous bio page. Built with native rupee pricing and zero complex setups.
         </p>
 
@@ -142,33 +142,33 @@ export default function Landing() {
         </div>
 
         {/* Social Proof / Trust metrics */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs font-medium text-slate-500">
+        <div className="mt-8 grid grid-cols-2 gap-3 text-left sm:mt-10 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 text-xs font-medium text-slate-500">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-emerald-600" />
             <span>No credit card required</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-emerald-600" />
             <span>Free forever tier</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-emerald-600" />
             <span>Instant UPI activation</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+            <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-emerald-600" />
             <span>Sub-millisecond redirects</span>
           </div>
         </div>
 
         {/* Interactive Visual Product Mockup */}
-        <div className="relative mx-auto mt-14 max-w-4xl rounded-2xl border border-slate-200/80 bg-white/70 p-4 sm:p-7 shadow-[0_20px_50px_-15px_rgba(79,70,229,0.12)] backdrop-blur-xl">
+        <div className="relative mx-auto mt-10 sm:mt-14 max-w-4xl rounded-2xl border border-slate-200/80 bg-white/70 p-4 sm:p-7 shadow-[0_20px_50px_-15px_rgba(79,70,229,0.12)] backdrop-blur-xl">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div className="flex items-center gap-2">
               <span className="h-3 w-3 rounded-full bg-rose-400" />
               <span className="h-3 w-3 rounded-full bg-amber-400" />
               <span className="h-3 w-3 rounded-full bg-emerald-400" />
-              <span className="ml-2 text-xs font-semibold text-slate-400">linkzy.in / live demonstration</span>
+              <span className="ml-2 hidden text-xs font-semibold text-slate-400 sm:inline">linkzy.in / live demonstration</span>
             </div>
             <span className="badge badge-emerald">Live Active</span>
           </div>
@@ -186,14 +186,14 @@ export default function Landing() {
                 <p className="text-xs font-semibold text-brand-700 uppercase tracking-wider flex items-center gap-1.5">
                   <Sparkles className="h-3.5 w-3.5" /> High Converting Short Link
                 </p>
-                <div className="mt-1 flex items-center justify-between rounded-xl bg-brand-50/80 border border-brand-200 px-4 py-3">
-                  <div className="flex items-center gap-2 font-semibold text-brand-700">
-                    <Link2 className="h-4 w-4 text-brand-600" />
-                    <span>linkzy.in/diwali-kurti-sale</span>
+                <div className="mt-1 flex items-center justify-between gap-2 rounded-xl bg-brand-50/80 border border-brand-200 px-3 py-3 sm:px-4">
+                  <div className="flex min-w-0 items-center gap-2 text-sm font-semibold text-brand-700 sm:text-base">
+                    <Link2 className="h-4 w-4 flex-shrink-0 text-brand-600" />
+                    <span className="truncate">linkzy.in/diwali-kurti-sale</span>
                   </div>
                   <button
                     onClick={handleCopyDemo}
-                    className="flex items-center gap-1 rounded-lg bg-white px-2.5 py-1 text-xs font-medium text-brand-700 shadow-xs border border-brand-200/80 hover:bg-brand-50 transition cursor-pointer"
+                    className="flex flex-shrink-0 items-center gap-1 rounded-lg bg-white px-2.5 py-1 text-xs font-medium text-brand-700 shadow-xs border border-brand-200/80 hover:bg-brand-50 transition cursor-pointer"
                   >
                     <Copy className="h-3.5 w-3.5" />
                     {demoCopied ? "Copied! ✨" : "Copy"}
@@ -202,18 +202,18 @@ export default function Landing() {
               </div>
 
               {/* Mini Stats Ribbon */}
-              <div className="grid grid-cols-3 gap-3 pt-2">
-                <div className="rounded-xl border border-slate-100 bg-white p-3 shadow-xs">
+              <div className="grid grid-cols-3 gap-2 pt-2 sm:gap-3">
+                <div className="min-w-0 rounded-xl border border-slate-100 bg-white p-2.5 shadow-xs sm:p-3">
                   <p className="text-[11px] text-slate-400">Clicks</p>
-                  <p className="text-lg font-bold text-slate-900">4,892</p>
+                  <p className="text-base font-bold text-slate-900 sm:text-lg">4,892</p>
                 </div>
-                <div className="rounded-xl border border-slate-100 bg-white p-3 shadow-xs">
+                <div className="min-w-0 rounded-xl border border-slate-100 bg-white p-2.5 shadow-xs sm:p-3">
                   <p className="text-[11px] text-slate-400">Top Channel</p>
-                  <p className="text-sm font-bold text-emerald-600">WhatsApp (68%)</p>
+                  <p className="text-xs font-bold leading-snug text-emerald-600 sm:text-sm">WhatsApp (68%)</p>
                 </div>
-                <div className="rounded-xl border border-slate-100 bg-white p-3 shadow-xs">
+                <div className="min-w-0 rounded-xl border border-slate-100 bg-white p-2.5 shadow-xs sm:p-3">
                   <p className="text-[11px] text-slate-400">Conversion</p>
-                  <p className="text-lg font-bold text-brand-600">+34.2%</p>
+                  <p className="text-base font-bold text-brand-600 sm:text-lg">+34.2%</p>
                 </div>
               </div>
             </div>
@@ -236,7 +236,7 @@ export default function Landing() {
           <div className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
             <Sparkles className="h-3.5 w-3.5" /> Core Capabilities
           </div>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Everything you need to grow your digital footprint
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-slate-600 text-sm sm:text-base">
@@ -244,7 +244,7 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((f) => {
             const Icon = f.icon;
             return (
@@ -275,7 +275,7 @@ export default function Landing() {
       </section>
 
       {/* Use Cases Section */}
-      <section className="rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white to-slate-50/80 p-8 sm:p-12 shadow-sm">
+      <section className="rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white to-slate-50/80 p-5 sm:p-12 shadow-sm">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             Built for how modern Indian commerce actually works
@@ -285,7 +285,7 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {USE_CASES.map((uc) => {
             const Icon = uc.icon;
             return (
@@ -307,7 +307,7 @@ export default function Landing() {
           <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 border border-emerald-200">
             ₹ 100% Transparent INR Pricing
           </div>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Simple, honest pricing for every stage
           </h2>
           <p className="mt-3 text-slate-600 text-sm sm:text-base">
@@ -315,21 +315,21 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3 items-stretch">
+        <div className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6 items-stretch">
           {plans.map((p) => {
             const isStarter = p.key === "starter";
             const isPro = p.key === "pro";
             return (
               <div
                 key={p.key}
-                className={`relative flex flex-col justify-between rounded-3xl border bg-white p-8 transition-all ${
+                className={`relative flex flex-col justify-between rounded-3xl border bg-white p-6 sm:p-8 transition-all ${
                   isStarter
                     ? "border-brand-500 shadow-xl shadow-brand-500/10 ring-2 ring-brand-500/20 md:-translate-y-2"
                     : "border-slate-200 shadow-sm hover:shadow-md"
                 }`}
               >
                 {isStarter && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-600 to-indigo-600 px-4 py-1 text-xs font-bold text-white shadow-md">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-600 to-indigo-600 px-4 py-1 text-xs font-bold whitespace-nowrap text-white shadow-md">
                     🔥 Most Popular for Sellers
                   </div>
                 )}
@@ -406,7 +406,7 @@ export default function Landing() {
       </section>
 
       {/* Inspiring Bottom CTA Banner */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-600 via-indigo-600 to-violet-700 px-6 py-14 sm:px-12 sm:py-16 text-white shadow-xl shadow-brand-500/20 text-center">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-600 via-indigo-600 to-violet-700 px-5 py-12 sm:px-12 sm:py-16 text-white shadow-xl shadow-brand-500/20 text-center">
         <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/10 blur-2xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-indigo-400/20 blur-2xl pointer-events-none" />
 
@@ -414,7 +414,7 @@ export default function Landing() {
           <span className="inline-block rounded-full bg-white/20 px-3.5 py-1 text-xs font-semibold backdrop-blur-md">
             🚀 Ready in 30 seconds
           </span>
-          <h2 className="text-3xl font-extrabold sm:text-4xl tracking-tight">
+          <h2 className="text-2xl font-extrabold sm:text-4xl tracking-tight">
             Stop losing sales to long, messy links.
           </h2>
           <p className="text-sm text-indigo-100 sm:text-base">
@@ -423,7 +423,7 @@ export default function Landing() {
           <div className="pt-4">
             <Link
               to={user ? "/dashboard" : "/register"}
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-bold text-brand-700 shadow-md transition hover:bg-slate-100 hover:scale-105 active:scale-95"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold sm:w-auto sm:px-7 sm:text-base text-brand-700 shadow-md transition hover:bg-slate-100 hover:scale-105 active:scale-95"
             >
               <Zap className="h-5 w-5 fill-brand-700 text-brand-700" />
               {user ? "Open Your Dashboard" : "Create Your Free Account"}

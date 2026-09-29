@@ -46,7 +46,7 @@ export default function Register() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-500/25">
           <Link2 className="h-6 w-6" strokeWidth={2.5} />
         </div>
-        <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900">
+        <h1 className="mt-4 text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">
           Create your free Linkzy account
         </h1>
         <p className="mt-1 text-xs text-slate-500">
@@ -157,7 +157,7 @@ export default function Register() {
         </div>
       </form>
 
-      <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
+      <div className="mt-6 flex items-center justify-center gap-2 text-center text-xs text-slate-400">
         <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
         <span>Your data is protected under India DPDP Act guidelines</span>
       </div>

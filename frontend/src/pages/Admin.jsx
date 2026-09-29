@@ -58,9 +58,9 @@ export default function Admin() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2">
+        <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2">
           <ShieldAlert className="h-6 w-6 text-brand-600" />
           Admin Command Center
         </h1>
@@ -70,7 +70,7 @@ export default function Admin() {
       </div>
 
       {stats && (
-        <div className="grid gap-5 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           {[
             { label: "Total Users", value: stats.users, icon: UsersIcon, color: "text-blue-600 bg-blue-50 border-blue-200" },
             { label: "Active Links", value: stats.links, icon: Link2, color: "text-indigo-600 bg-indigo-50 border-indigo-200" },
@@ -79,14 +79,14 @@ export default function Admin() {
           ].map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.label} className="card card-hover flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">{item.label}</p>
-                  <p className="mt-1 text-2xl font-extrabold text-slate-900">
+              <div key={item.label} className="card card-hover flex flex-col-reverse items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">{item.label}</p>
+                  <p className="mt-1 text-xl font-extrabold text-slate-900 sm:text-2xl">
                     {item.value.toLocaleString("en-IN")}
                   </p>
                 </div>
-                <div className={`flex h-11 w-11 items-center justify-center rounded-2xl border ${item.color}`}>
+                <div className={`flex h-10 w-10 flex-shrink-0 sm:h-11 sm:w-11 items-center justify-center rounded-2xl border ${item.color}`}>
                   <Icon className="h-5 w-5" />
                 </div>
               </div>
@@ -97,7 +97,7 @@ export default function Admin() {
 
       {/* Abuse Reports Section */}
       <section className="card space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
           <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
             <AlertTriangle className="h-4 w-4 text-rose-600" />
             Open Abuse & Phishing Reports ({reports.length})
@@ -116,8 +116,8 @@ export default function Admin() {
             {reports.map((r) => (
               <div key={r._id} className="flex flex-col gap-3 py-3.5 md:flex-row md:items-center">
                 <div className="min-w-0 flex-1 text-xs space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-brand-700">/{r.shortCode}</span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="break-all font-mono font-bold text-brand-700">/{r.shortCode}</span>
                     <span className="badge badge-rose text-[10px]">{r.reason}</span>
                   </div>
                   {r.link ? (
@@ -134,7 +134,7 @@ export default function Admin() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-2 self-start md:self-auto">
+                <div className="flex flex-wrap items-center gap-2 md:flex-shrink-0">
                   <button className="btn-ghost py-1 px-3 text-xs" onClick={() => resolve(r._id, "dismiss")}>
                     Dismiss
                   </button>
@@ -171,8 +171,8 @@ export default function Admin() {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+          <table className="w-full min-w-[600px] whitespace-nowrap text-left text-xs [&_td]:pr-4 [&_th]:pr-4">
             <thead className="text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-100">
               <tr>
                 <th className="py-2.5">User</th>

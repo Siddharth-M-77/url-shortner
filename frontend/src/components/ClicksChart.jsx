@@ -25,7 +25,7 @@ export default function ClicksChart({ data = [] }) {
   };
 
   return (
-    <div className="h-72 w-full pt-2">
+    <div className="h-56 w-full pt-2 sm:h-72">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={formatted} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <defs>

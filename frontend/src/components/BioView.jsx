@@ -28,11 +28,11 @@ export default function BioView({ page, showBranding = true, compact = false }) 
         </div>
 
         {/* Display Name with Verified Badge */}
-        <div className="mt-4 flex items-center justify-center gap-1.5">
-          <h1 className="text-xl font-extrabold tracking-tight">
+        <div className="mt-4 flex max-w-full items-center justify-center gap-1.5">
+          <h1 className="min-w-0 break-words text-xl font-extrabold tracking-tight">
             {page.displayName || `@${page.username}`}
           </h1>
-          <CheckCircle2 className="h-4 w-4 text-sky-400 fill-sky-400/20" />
+          <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-sky-400 fill-sky-400/20" />
         </div>
 
         {/* Username */}
@@ -89,9 +89,9 @@ export default function BioView({ page, showBranding = true, compact = false }) 
               rel="noreferrer"
               className={`group flex items-center justify-between w-full rounded-2xl px-5 py-3.5 font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] ${theme.button}`}
             >
-              <div className="flex items-center gap-2.5">
-                <InstagramIcon className="h-4 w-4 text-rose-500" />
-                <span>@{page.instagram}</span>
+              <div className="flex min-w-0 items-center gap-2.5">
+                <InstagramIcon className="h-4 w-4 flex-shrink-0 text-rose-500" />
+                <span className="truncate">@{page.instagram}</span>
               </div>
               <ChevronRight className="h-4 w-4 opacity-60 transition-transform group-hover:translate-x-1" />
             </a>

@@ -32,7 +32,7 @@ function StatCard({ label, value, hint, icon: Icon, color, progress }) {
             <Icon className="h-5 w-5" />
           </div>
         </div>
-        <p className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">{value}</p>
+        <p className="mt-3 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">{value}</p>
       </div>
 
       <div className="mt-4 pt-3 border-t border-slate-100">
@@ -100,15 +100,15 @@ export default function Dashboard() {
   const linkProgress = linkLimit ? (currentMonthLinks / linkLimit) * 100 : 0;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Top Welcome Bar */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-slate-200/80 bg-white/70 p-6 backdrop-blur-md shadow-xs">
-        <div className="flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white font-extrabold text-lg shadow-md shadow-brand-500/20 uppercase">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-slate-200/80 bg-white/70 p-4 sm:p-6 backdrop-blur-md shadow-xs">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white font-extrabold text-lg shadow-md shadow-brand-500/20 uppercase">
             {(user?.name || user?.email || "U")[0]}
           </div>
-          <div>
-            <div className="flex items-center gap-2">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">
                 Hi, {user?.name?.split(" ")[0]} 👋
               </h1>
@@ -122,7 +122,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
+        <div className="flex flex-wrap items-center gap-2 sm:flex-shrink-0">
           {plan?.key === "free" && (
             <Link
               to="/billing"
@@ -146,7 +146,7 @@ export default function Dashboard() {
       <CreateLinkForm onCreated={handleCreated} />
 
       {/* 3 Main Stat Cards */}
-      <div className="grid gap-5 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
         <StatCard
           label="Total Links"
           value={overview?.totalLinks ?? "–"}
@@ -169,7 +169,7 @@ export default function Dashboard() {
           progress={linkLimit ? linkProgress : undefined}
           hint={
             linkLimit ? (
-              <span className="flex items-center justify-between">
+              <span className="flex flex-wrap items-center justify-between gap-1">
                 <span>{linkLimit - currentMonthLinks > 0 ? `${linkLimit - currentMonthLinks} links remaining` : "Quota reached"}</span>
                 <Link to="/billing" className="font-semibold text-brand-600 hover:underline">Upgrade →</Link>
               </span>
@@ -253,7 +253,7 @@ export default function Dashboard() {
         )}
 
         {pagination.pages > 1 && (
-          <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+          <div className="mt-6 flex items-center justify-between gap-2 border-t border-slate-100 pt-4">
             <button
               className="btn-ghost py-1.5 text-xs"
               disabled={pagination.page <= 1}

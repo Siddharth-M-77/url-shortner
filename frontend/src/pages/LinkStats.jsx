@@ -71,7 +71,7 @@ export default function LinkStats() {
   const { link, stats } = data;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Back button */}
       <div>
         <Link
@@ -86,7 +86,7 @@ export default function LinkStats() {
       {/* Main Link Header Card */}
       <div className="card relative overflow-hidden flex flex-col gap-6 md:flex-row md:items-center">
         {/* QR Code Container */}
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200/90 bg-slate-50/70 p-3 self-center sm:self-auto">
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200/90 bg-slate-50/70 p-3 self-center md:self-auto">
           <img
             src={`/api/links/${link._id}/qr?size=256`}
             alt="Dynamic QR Code"
@@ -100,7 +100,7 @@ export default function LinkStats() {
         {/* Link Info */}
         <div className="min-w-0 flex-1 space-y-2">
           {link.title && (
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="break-words text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
               {link.title}
             </h1>
           )}
@@ -110,11 +110,11 @@ export default function LinkStats() {
               href={link.shortUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 text-lg font-extrabold text-brand-600 hover:text-brand-800 transition"
+              className="flex min-w-0 max-w-full items-center gap-1.5 text-base sm:text-lg font-extrabold text-brand-600 hover:text-brand-800 transition"
             >
-              <Link2 className="h-4 w-4" />
-              <span>{link.shortUrl.replace(/^https?:\/\//, "")}</span>
-              <ExternalLink className="h-3.5 w-3.5 opacity-60" />
+              <Link2 className="h-4 w-4 flex-shrink-0" />
+              <span className="break-all">{link.shortUrl.replace(/^https?:\/\//, "")}</span>
+              <ExternalLink className="h-3.5 w-3.5 flex-shrink-0 opacity-60" />
             </a>
 
             <button
@@ -146,10 +146,10 @@ export default function LinkStats() {
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
-              <span className="truncate max-w-md">→ {link.originalUrl}</span>
+            <div className="flex min-w-0 items-center gap-2 text-xs text-slate-500 font-mono">
+              <span className="min-w-0 truncate md:max-w-md">→ {link.originalUrl}</span>
               <button
-                className="flex items-center gap-1 font-semibold text-brand-600 hover:text-brand-800 transition cursor-pointer"
+                className="flex flex-shrink-0 items-center gap-1 font-semibold text-brand-600 hover:text-brand-800 transition cursor-pointer"
                 onClick={() => setEditing(true)}
               >
                 <Edit2 className="h-3 w-3" />
@@ -180,7 +180,7 @@ export default function LinkStats() {
         </div>
 
         {/* Total Clicks Metric Box */}
-        <div className="flex flex-col items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-50 to-indigo-50/50 border border-brand-100 p-5 text-center sm:min-w-[160px]">
+        <div className="flex flex-col items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-50 to-indigo-50/50 border border-brand-100 p-5 text-center md:min-w-[160px]">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 text-white shadow-xs">
             <MousePointerClick className="h-5 w-5" />
           </div>
@@ -205,12 +205,12 @@ export default function LinkStats() {
           </div>
 
           {/* Time range selector */}
-          <div className="flex items-center gap-1 rounded-xl bg-slate-100 p-1">
+          <div className="flex w-full items-center gap-1 rounded-xl bg-slate-100 p-1 sm:w-auto">
             {RANGES.map((r) => (
               <button
                 key={r.value}
                 onClick={() => setDays(r.value)}
-                className={`rounded-lg px-3 py-1 text-xs font-bold transition cursor-pointer ${
+                className={`flex-1 rounded-lg px-3 py-1.5 text-xs font-bold transition cursor-pointer sm:flex-none ${
                   days === r.value
                     ? "bg-white text-brand-700 shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
@@ -225,7 +225,7 @@ export default function LinkStats() {
         <ClicksChart data={stats.daily} />
 
         {stats.trackedClicks < link.clicks && days >= 30 && (
-          <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/70 p-3 text-xs text-amber-800 flex items-center gap-2">
+          <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/70 p-3 text-xs text-amber-800 flex items-start gap-2 sm:items-center">
             <Sparkles className="h-4 w-4 text-amber-600 flex-shrink-0" />
             <span>
               Detailed click telemetry is limited by your current plan's tracked clicks quota.{" "}
@@ -236,7 +236,7 @@ export default function LinkStats() {
       </div>
 
       {/* 4 Breakdown Cards */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
         <BreakdownList title="Top Traffic Sources" items={stats.referrers} />
         <BreakdownList title="Device Types" items={stats.devices} />
         <BreakdownList title="Web Browsers" items={stats.browsers} />

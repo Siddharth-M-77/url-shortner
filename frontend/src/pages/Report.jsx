@@ -48,7 +48,7 @@ export default function Report() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-50 text-rose-600 border border-rose-200/80 shadow-xs">
           <ShieldAlert className="h-6 w-6" />
         </div>
-        <h1 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900">
+        <h1 className="mt-4 text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">
           Report a Suspicious Link
         </h1>
         <p className="mt-1 text-xs text-slate-500">

@@ -6,14 +6,14 @@ import { ArrowLeft, ShieldCheck } from "lucide-react";
 
 function PolicyLayout({ title, children }) {
   return (
-    <article className="card mx-auto max-w-3xl space-y-6 text-sm leading-relaxed text-slate-700 shadow-md">
+    <article className="card mx-auto max-w-3xl space-y-6 break-words text-sm leading-relaxed text-slate-700 shadow-md">
       <div className="border-b border-slate-100 pb-4">
         <Link to="/" className="inline-flex items-center gap-1 text-xs font-semibold text-brand-600 hover:underline mb-3">
           <ArrowLeft className="h-3.5 w-3.5" /> Back to Home
         </Link>
         <div className="flex items-center gap-2">
-          <ShieldCheck className="h-5 w-5 text-brand-600" />
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">{title}</h1>
+          <ShieldCheck className="h-5 w-5 flex-shrink-0 text-brand-600" />
+          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">{title}</h1>
         </div>
         <p className="mt-1 text-xs text-slate-400">Last updated: {B.lastUpdated}</p>
       </div>

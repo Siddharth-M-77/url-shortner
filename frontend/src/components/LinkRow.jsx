@@ -91,11 +91,11 @@ export default function LinkRow({ link, onChange, onDelete }) {
             href={link.shortUrl}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 font-bold text-brand-600 hover:text-brand-800 transition-colors text-base"
+            className="flex min-w-0 max-w-full items-center gap-1.5 font-bold text-brand-600 hover:text-brand-800 transition-colors text-sm sm:text-base"
           >
-            <Link2 className="h-4 w-4" />
-            <span>{link.shortUrl.replace(/^https?:\/\//, "")}</span>
-            <ExternalLink className="h-3 w-3 opacity-60" />
+            <Link2 className="h-4 w-4 flex-shrink-0" />
+            <span className="break-all">{link.shortUrl.replace(/^https?:\/\//, "")}</span>
+            <ExternalLink className="h-3 w-3 flex-shrink-0 opacity-60" />
           </a>
 
           {/* Status Badge with Ping */}
@@ -121,7 +121,7 @@ export default function LinkRow({ link, onChange, onDelete }) {
         </p>
 
         {/* Meta Timestamps */}
-        <div className="flex items-center gap-3 text-[11px] text-slate-400">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-400">
           <span className="flex items-center gap-1">
             <Calendar className="h-3 w-3" />
             Created {formatDate(link.createdAt)}
