@@ -23,6 +23,18 @@ function encodeBase62(num) {
   return code.padStart(CODE_LENGTH, ALPHABET[0]);
 }
 
+// Raises the counter to at least `min` (never lowers it). Used to recover when the
+// Redis counter was lost (flush, eviction, restart without persistence).
+const RAISE_TO_SCRIPT = `
+local cur = tonumber(redis.call("GET", KEYS[1]) or "0")
+local min = tonumber(ARGV[1])
+if cur < min then redis.call("SET", KEYS[1], min) return min end
+return cur`;
+
+export function ensureCounterAtLeast(min) {
+  return redis.eval(RAISE_TO_SCRIPT, 1, COUNTER_KEY, String(min));
+}
+
 export async function generateShortCode() {
   // INCR is atomic, so parallel PM2 instances never receive the same number
   const id = await redis.incr(COUNTER_KEY);

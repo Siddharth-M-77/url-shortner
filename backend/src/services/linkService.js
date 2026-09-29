@@ -1,13 +1,14 @@
 import { Link } from "../models/Link.js";
 import { redis } from "../config/redis.js";
 import { getPlan } from "../config/plans.js";
-import { generateShortCode } from "../utils/idGenerator.js";
+import { ensureCounterAtLeast, generateShortCode } from "../utils/idGenerator.js";
 import { assertValidUrl, assertNotMalicious } from "../utils/urlSafety.js";
 import { AppError } from "../utils/AppError.js";
 
 const CACHE_TTL = 60 * 60 * 24; // 24h for hot links
 const NEGATIVE_TTL = 300; // 5 min for unknown codes
 const NOT_FOUND = "__NF__";
+const MAX_CODE_ATTEMPTS = 20;
 
 const cacheKey = (code) => `link:${code}`;
 
@@ -20,21 +21,41 @@ export async function createLink({ user, originalUrl, title, customAlias, expire
     throw new AppError("Custom aliases are available on Starter and Pro plans", 403);
   }
 
-  const shortCode = customAlias || (await generateShortCode());
   const expiresAt = expiresInDays ? new Date(Date.now() + expiresInDays * 86_400_000) : null;
-
-  const link = await Link.create({
-    shortCode,
+  const fields = {
     originalUrl: cleanUrl,
     title: title || "",
     user: user._id,
     isCustom: Boolean(customAlias),
     expiresAt,
-  });
+  };
 
-  // Drop any negative cache entry created by someone probing this alias earlier
-  await redis.del(cacheKey(shortCode));
-  return link;
+  // Custom alias: a duplicate is the user's problem, the error handler reports it as taken
+  if (customAlias) {
+    const link = await Link.create({ ...fields, shortCode: customAlias });
+    // Drop any negative cache entry created by someone probing this alias earlier
+    await redis.del(cacheKey(customAlias));
+    return link;
+  }
+
+  // Generated code: a duplicate means the Redis counter went backwards. Skip it past
+  // the codes already used and try again instead of failing the request.
+  for (let attempt = 0; attempt < MAX_CODE_ATTEMPTS; attempt++) {
+    const shortCode = await generateShortCode();
+    try {
+      const link = await Link.create({ ...fields, shortCode });
+      await redis.del(cacheKey(shortCode));
+      return link;
+    } catch (err) {
+      if (err.code !== 11000) throw err;
+      if (attempt === 0) {
+        const used = await Link.countDocuments({ isCustom: false });
+        await ensureCounterAtLeast(used);
+        console.warn(`Short code collision on ${shortCode}; link counter raised to at least ${used}`);
+      }
+    }
+  }
+  throw new AppError("Could not generate a short link, please try again", 503);
 }
 
 // Returns the cached payload { id, url, userId } or null if the link is unusable
