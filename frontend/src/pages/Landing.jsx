@@ -255,7 +255,7 @@ export default function Landing() {
 
               <div className="grid gap-4 p-4 sm:p-6 md:grid-cols-5">
                 {/* Link + chart */}
-                <div className="space-y-4 md:col-span-3">
+                <div className="min-w-0 space-y-4 md:col-span-3">
                   <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 font-mono text-[11px] text-slate-400">
                     <p className="truncate">https://myshop.in/collections/festive/products/anarkali-suit?utm_source=insta</p>
                   </div>
@@ -288,7 +288,7 @@ export default function Landing() {
                 </div>
 
                 {/* Sources + QR */}
-                <div className="grid grid-cols-2 gap-4 md:col-span-2 md:grid-cols-1">
+                <div className="grid min-w-0 grid-cols-2 gap-4 md:col-span-2 md:grid-cols-1">
                   <div className="rounded-xl border border-slate-200 p-4">
                     <p className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">Top sources</p>
                     <ul className="mt-3 space-y-2.5">
@@ -325,7 +325,7 @@ export default function Landing() {
           </div>
 
           {/* Floating chips (hidden on small phones to keep things clean) */}
-          <div className="absolute top-24 -left-6 hidden items-center gap-2 rounded-2xl border border-slate-200/80 bg-white/95 px-3 py-2 shadow-xl backdrop-blur lg:flex">
+          <div className="absolute bottom-28 -left-10 hidden items-center gap-2 rounded-2xl border border-slate-200/80 bg-white/95 px-3 py-2 shadow-xl backdrop-blur lg:flex">
             <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500 text-white">
               <MousePointerClick className="h-4 w-4" />
             </span>
@@ -605,7 +605,7 @@ export default function Landing() {
 
         <p className="mt-8 flex items-center justify-center gap-1.5 text-center text-xs text-slate-500">
           <ShieldCheck className="h-4 w-4 flex-shrink-0 text-emerald-500" />
-          Secure payments by Razorpay · Prices include no hidden fees
+          Secure payments by Razorpay · No hidden fees
         </p>
       </section>
 
