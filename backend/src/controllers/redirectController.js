@@ -1,5 +1,5 @@
 import { resolveLink } from "../services/linkService.js";
-import { enqueueClick } from "../queues/clickQueue.js";
+import { enqueueClick, LOG_CLICKS } from "../queues/clickQueue.js";
 import { env } from "../config/env.js";
 import {
   getCountry,
@@ -19,12 +19,16 @@ export async function redirect(req, res) {
 
   const link = await resolveLink(code);
   if (!link) {
+    if (LOG_CLICKS) console.log(`[click] /${code} not found, inactive or expired -> /not-found`);
     return res.redirect(302, `${env.clientUrl}/not-found`);
   }
 
   const ua = req.headers["user-agent"];
-  if (!isBot(ua)) {
+  if (isBot(ua)) {
+    if (LOG_CLICKS) console.log(`[click] /${code} skipped, bot user-agent: ${ua || "(none)"}`);
+  } else {
     enqueueClick({
+      code,
       linkId: link.id,
       userId: link.userId,
       referrer: normalizeReferrer(req.headers.referer),

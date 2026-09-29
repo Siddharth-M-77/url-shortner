@@ -13,9 +13,19 @@ export const clickQueue = new Queue(CLICK_QUEUE, {
   },
 });
 
+// Set LOG_CLICKS=false in .env to silence the per-click debug logs
+export const LOG_CLICKS = process.env.LOG_CLICKS !== "false";
+
+clickQueue.on("error", (err) => console.error("[click] queue Redis error:", err.message));
+
 // Fire-and-forget: analytics must never slow down or break a redirect
 export function enqueueClick(data) {
-  clickQueue.add("click", data).catch((err) => {
-    console.error("Failed to enqueue click:", err.message);
-  });
+  clickQueue
+    .add("click", data)
+    .then((job) => {
+      if (LOG_CLICKS) console.log(`[click] /${data.code} queued as job ${job.id}`);
+    })
+    .catch((err) => {
+      console.error(`[click] /${data.code} FAILED to queue:`, err.message);
+    });
 }
