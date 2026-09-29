@@ -1,8 +1,11 @@
 import axios from "axios";
 
+// API origin + /api. On production the API lives on its own subdomain (api.chhotulink.online)
+export const API_BASE = (import.meta.env.VITE_API_URL || "/api").replace(/\/$/, "");
+
 // withCredentials sends the httpOnly auth cookie on every request
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
+  baseURL: API_BASE,
   withCredentials: true,
 });
 

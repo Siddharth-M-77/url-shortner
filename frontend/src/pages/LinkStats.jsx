@@ -15,7 +15,7 @@ import {
   Sparkles,
   TrendingUp,
 } from "lucide-react";
-import { api, errorMessage } from "../api/client.js";
+import { api, API_BASE, errorMessage } from "../api/client.js";
 import ClicksChart from "../components/ClicksChart.jsx";
 import BreakdownList from "../components/BreakdownList.jsx";
 import Spinner from "../components/Spinner.jsx";
@@ -88,7 +88,7 @@ export default function LinkStats() {
         {/* QR Code Container */}
         <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200/90 bg-slate-50/70 p-3 self-center md:self-auto">
           <img
-            src={`/api/links/${link._id}/qr?size=256`}
+            src={`${API_BASE}/links/${link._id}/qr?size=256`}
             alt="Dynamic QR Code"
             className="h-32 w-32 rounded-xl bg-white p-1.5 shadow-xs"
           />
@@ -161,7 +161,7 @@ export default function LinkStats() {
           {/* Download QR buttons */}
           <div className="flex flex-wrap items-center gap-2 pt-2">
             <a
-              href={`/api/links/${link._id}/qr?format=png`}
+              href={`${API_BASE}/links/${link._id}/qr?format=png`}
               className="btn-ghost py-1.5 px-3 text-xs"
               download
             >
@@ -169,7 +169,7 @@ export default function LinkStats() {
               <span>Download PNG QR</span>
             </a>
             <a
-              href={`/api/links/${link._id}/qr?format=svg`}
+              href={`${API_BASE}/links/${link._id}/qr?format=svg`}
               className="btn-ghost py-1.5 px-3 text-xs"
               download
             >

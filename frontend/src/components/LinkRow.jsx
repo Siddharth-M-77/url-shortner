@@ -15,7 +15,7 @@ import {
   Calendar,
   MousePointerClick,
 } from "lucide-react";
-import { api, errorMessage } from "../api/client.js";
+import { api, API_BASE, errorMessage } from "../api/client.js";
 
 function formatDate(value) {
   return new Date(value).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
@@ -166,7 +166,7 @@ export default function LinkRow({ link, onChange, onDelete }) {
 
         {/* QR Code */}
         <a
-          href={`/api/links/${link._id}/qr`}
+          href={`${API_BASE}/links/${link._id}/qr`}
           target="_blank"
           rel="noreferrer"
           className="btn-ghost px-3 py-1.5 text-xs"
