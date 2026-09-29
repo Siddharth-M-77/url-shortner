@@ -18,6 +18,7 @@ import {
 import { api, API_BASE, errorMessage } from "../api/client.js";
 import ClicksChart from "../components/ClicksChart.jsx";
 import BreakdownList from "../components/BreakdownList.jsx";
+import ShareTrackedLinks from "../components/ShareTrackedLinks.jsx";
 import Spinner from "../components/Spinner.jsx";
 
 const RANGES = [
@@ -192,6 +193,8 @@ export default function LinkStats() {
           </p>
         </div>
       </div>
+
+      <ShareTrackedLinks shortUrl={link.shortUrl} />
 
       {/* Chart Card */}
       <div className="card">

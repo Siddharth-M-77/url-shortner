@@ -7,6 +7,10 @@ import {
   Compass,
   Layers,
   MapPin,
+  QrCode,
+  Mail,
+  Send,
+  Link2,
 } from "lucide-react";
 import { InstagramIcon } from "./BrandIcons.jsx";
 
@@ -23,6 +27,10 @@ function getItemIcon(key = "", title = "") {
   if (t.includes("source") || t.includes("referrer")) {
     if (k.includes("insta")) return InstagramIcon;
     if (k.includes("whats") || k.includes("wa.me")) return MessageCircle;
+    if (k === "qr") return QrCode;
+    if (k === "email") return Mail;
+    if (k === "telegram" || k === "sms") return Send;
+    if (k === "direct") return Link2;
     return Globe;
   }
 

@@ -18,6 +18,65 @@ const SOURCE_MAP = [
   ["t.me", "telegram"],
 ];
 
+// Short aliases people can put in a link, e.g. chhotulink.online/abc?s=wa
+const SOURCE_ALIASES = {
+  wa: "whatsapp",
+  whatsapp: "whatsapp",
+  ig: "instagram",
+  insta: "instagram",
+  instagram: "instagram",
+  fb: "facebook",
+  facebook: "facebook",
+  yt: "youtube",
+  youtube: "youtube",
+  tg: "telegram",
+  telegram: "telegram",
+  x: "twitter",
+  twitter: "twitter",
+  li: "linkedin",
+  linkedin: "linkedin",
+  qr: "qr",
+  sms: "sms",
+  email: "email",
+};
+
+// Source written into the link itself: ?s=whatsapp or ?utm_source=whatsapp.
+// This is the only reliable way to track apps that send no Referer (WhatsApp, iOS apps, email).
+export function sourceFromQuery(query = {}) {
+  const raw = [query.s, query.src, query.utm_source].find((v) => typeof v === "string" && v.trim());
+  if (!raw) return null;
+  const value = raw.trim().toLowerCase();
+  if (SOURCE_ALIASES[value]) return SOURCE_ALIASES[value];
+  // Unknown but harmless custom label, e.g. ?s=diwali-poster
+  return /^[a-z0-9_-]{1,24}$/.test(value) ? value : null;
+}
+
+// In-app browsers name themselves in the user-agent even when they send no Referer
+const IN_APP_BROWSERS = [
+  [/Instagram/i, "instagram"],
+  [/FBAN|FBAV|FB_IAB|FBIOS/i, "facebook"],
+  [/LinkedInApp/i, "linkedin"],
+  [/Snapchat/i, "snapchat"],
+  [/Twitter/i, "twitter"],
+  [/musical_ly|BytedanceWebview|TikTok/i, "tiktok"],
+];
+
+function sourceFromUserAgent(ua = "") {
+  const match = IN_APP_BROWSERS.find(([re]) => re.test(ua));
+  return match ? match[1] : null;
+}
+
+// Best guess of where a click came from: tag in the link > Referer header > in-app browser
+export function detectSource(req) {
+  const fromReferrer = normalizeReferrer(req.headers.referer);
+  return (
+    sourceFromQuery(req.query) ||
+    (fromReferrer !== "direct" ? fromReferrer : null) ||
+    sourceFromUserAgent(req.headers["user-agent"]) ||
+    "direct"
+  );
+}
+
 export function normalizeReferrer(referrer) {
   if (!referrer) return "direct";
   try {

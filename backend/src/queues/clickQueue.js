@@ -23,7 +23,7 @@ export function enqueueClick(data) {
   clickQueue
     .add("click", data)
     .then((job) => {
-      if (LOG_CLICKS) console.log(`[click] /${data.code} queued as job ${job.id}`);
+      if (LOG_CLICKS) console.log(`[click] /${data.code} queued as job ${job.id} (source: ${data.referrer})`);
     })
     .catch((err) => {
       console.error(`[click] /${data.code} FAILED to queue:`, err.message);

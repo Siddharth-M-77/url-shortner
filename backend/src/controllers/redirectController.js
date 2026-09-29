@@ -3,8 +3,8 @@ import { enqueueClick, LOG_CLICKS } from "../queues/clickQueue.js";
 import { env } from "../config/env.js";
 import {
   getCountry,
+  detectSource,
   isBot,
-  normalizeReferrer,
   parseUserAgent,
 } from "../utils/requestInfo.js";
 
@@ -31,7 +31,7 @@ export async function redirect(req, res) {
       code,
       linkId: link.id,
       userId: link.userId,
-      referrer: normalizeReferrer(req.headers.referer),
+      referrer: detectSource(req),
       country: getCountry(req),
       at: Date.now(),
       ...parseUserAgent(ua),

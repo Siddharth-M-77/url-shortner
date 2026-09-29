@@ -12,6 +12,8 @@ import { getLinkStats, getUserOverview } from "../services/analyticsService.js";
 import { assertValidUrl, assertNotMalicious } from "../utils/urlSafety.js";
 
 const shortUrl = (code) => `${env.baseUrl}/${code}`;
+// Printed QR codes carry ?s=qr so scans show up as their own source in analytics
+const qrUrl = (code) => `${shortUrl(code)}?s=qr`;
 
 function serialize(link) {
   const obj = link.toJSON ? link.toJSON() : link;
@@ -117,8 +119,8 @@ export async function qr(req, res) {
   res.setHeader("Content-Disposition", `attachment; filename="qr-${link.shortCode}.${format}"`);
 
   if (format === "svg") {
-    res.type("image/svg+xml").send(await QRCode.toString(shortUrl(link.shortCode), { ...options, type: "svg" }));
+    res.type("image/svg+xml").send(await QRCode.toString(qrUrl(link.shortCode), { ...options, type: "svg" }));
   } else {
-    res.type("image/png").send(await QRCode.toBuffer(shortUrl(link.shortCode), options));
+    res.type("image/png").send(await QRCode.toBuffer(qrUrl(link.shortCode), options));
   }
 }
