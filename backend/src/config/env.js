@@ -22,6 +22,11 @@ export const env = {
   port: Number(process.env.PORT) || 5000,
   baseUrl: process.env.BASE_URL.replace(/\/$/, ""),
   clientUrl: process.env.CLIENT_URL.replace(/\/$/, ""),
+  // Extra origins allowed by CORS besides CLIENT_URL, comma separated (trailing slashes are ignored)
+  corsOrigins: (process.env.CORS_ORIGINS || "")
+    .split(",")
+    .map((o) => o.trim().replace(/\/$/, ""))
+    .filter(Boolean),
   mongoUri: process.env.MONGO_URI,
   redisUrl: process.env.REDIS_URL,
   jwtSecret: process.env.JWT_SECRET,

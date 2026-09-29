@@ -17,7 +17,7 @@ app.set("trust proxy", 1);
 app.disable("x-powered-by");
 
 app.use(helmet());
-app.use(cors({ origin: env.clientUrl, credentials: true }));
+app.use(cors({ origin: [env.clientUrl, ...env.corsOrigins], credentials: true }));
 // Razorpay webhook needs the exact raw bytes to verify the HMAC signature,
 // so it is registered BEFORE express.json() parses (and changes) the body
 app.post("/api/billing/webhook", express.raw({ type: "application/json", limit: "1mb" }), razorpayWebhook);
