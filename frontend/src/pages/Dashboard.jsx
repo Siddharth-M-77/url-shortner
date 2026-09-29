@@ -129,7 +129,7 @@ export default function Dashboard() {
               className="btn-primary py-2 text-xs shadow-sm"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              Upgrade to Starter (₹199)
+              Upgrade to Starter
             </Link>
           )}
           <Link

@@ -3,17 +3,23 @@ import { Link, useParams } from "react-router-dom";
 import { api } from "../api/client.js";
 import BioView from "../components/BioView.jsx";
 import Spinner from "../components/Spinner.jsx";
+import { useSeo } from "../utils/useSeo.js";
 
 export default function PublicBio() {
   const { username } = useParams();
   const [state, setState] = useState({ loading: true, page: null, showBranding: true });
+  const page = state.page;
+  useSeo({
+    title: page ? page.displayName || `@${page.username}` : undefined,
+    description: page ? page.bio || `Links from @${page.username}` : undefined,
+    path: `/u/${username}`,
+  });
 
   useEffect(() => {
     api
       .get(`/bio/public/${username}`)
       .then(({ data }) => {
         setState({ loading: false, page: data.page, showBranding: data.showBranding });
-        document.title = data.page.displayName || `@${data.page.username}`;
       })
       .catch(() => setState({ loading: false, page: null, showBranding: true }));
   }, [username]);

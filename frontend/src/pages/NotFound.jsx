@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Link2Off, ArrowLeft, Home } from "lucide-react";
+import { useSeo } from "../utils/useSeo.js";
 
 // Also used by the backend when a short link is missing, expired or blocked
 export default function NotFound() {
+  useSeo({ title: "Link not found", noindex: true });
   return (
     <div className="py-16 sm:py-24 text-center max-w-md mx-auto">
       <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-rose-50 text-rose-500 border border-rose-200 shadow-sm">

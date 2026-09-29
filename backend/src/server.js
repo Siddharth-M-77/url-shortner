@@ -10,7 +10,6 @@ const server = app.listen(env.port, () => {
   console.log(`API running on port ${env.port} (${env.nodeEnv})`);
 });
 
-// Graceful shutdown: stop accepting new requests, finish in-flight ones, close DBs
 async function shutdown(signal) {
   console.log(`${signal} received, shutting down...`);
   server.close(async () => {

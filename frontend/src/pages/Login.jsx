@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link2, Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { errorMessage } from "../api/client.js";
+import { useSeo } from "../utils/useSeo.js";
 
 export default function Login() {
   const { login } = useAuth();
@@ -11,6 +12,11 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  useSeo({
+    title: "Log in",
+    description: "Log in to Linkzy to manage your short links, QR codes, click analytics and bio page.",
+    path: "/login",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();

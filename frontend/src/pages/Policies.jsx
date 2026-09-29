@@ -3,8 +3,12 @@
 import { BUSINESS as B } from "../config/business.js";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { useSeo } from "../utils/useSeo.js";
 
 function PolicyLayout({ title, children }) {
+  const { pathname } = useLocation();
+  useSeo({ title, description: `${title} for ${B.brand}, the URL shortener, QR code and link-in-bio service.`, path: pathname });
   return (
     <article className="card mx-auto max-w-3xl space-y-6 break-words text-sm leading-relaxed text-slate-700 shadow-md">
       <div className="border-b border-slate-100 pb-4">

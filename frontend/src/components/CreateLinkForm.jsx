@@ -15,12 +15,24 @@ import {
 import { Link } from "react-router-dom";
 import { api, errorMessage } from "../api/client.js";
 import { useAuth } from "../context/AuthContext.jsx";
+import { PENDING_URL_KEY } from "../content/site.js";
 
 const EMPTY = { originalUrl: "", title: "", customAlias: "", expiresInDays: "" };
 
+// Picks up a URL pasted into the landing page hero (once), so the user doesn't paste it twice
+function takePendingUrl() {
+  try {
+    const url = sessionStorage.getItem(PENDING_URL_KEY) || "";
+    sessionStorage.removeItem(PENDING_URL_KEY);
+    return url;
+  } catch {
+    return "";
+  }
+}
+
 export default function CreateLinkForm({ onCreated }) {
   const { plan, refresh } = useAuth();
-  const [form, setForm] = useState(EMPTY);
+  const [form, setForm] = useState(() => ({ ...EMPTY, originalUrl: takePendingUrl() }));
   const [showOptions, setShowOptions] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 

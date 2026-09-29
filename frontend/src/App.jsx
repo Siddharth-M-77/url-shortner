@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
 import Layout from "./components/Layout.jsx";
 import Spinner from "./components/Spinner.jsx";
+import { useSeo } from "./utils/useSeo.js";
 import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -18,6 +19,8 @@ import { Terms, Privacy, Refund, Contact } from "./pages/Policies.jsx";
 // Redirects to login when there is no session
 function Protected({ children, admin = false }) {
   const { user, loading } = useAuth();
+  // Private app pages should never show up in search results
+  useSeo({ title: "Dashboard", noindex: true });
   if (loading) return <Spinner full />;
   if (!user) return <Navigate to="/login" replace />;
   if (admin && user.role !== "admin") return <Navigate to="/dashboard" replace />;

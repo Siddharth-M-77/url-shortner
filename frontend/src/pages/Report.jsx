@@ -3,11 +3,17 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ShieldAlert, CheckCircle2, ArrowLeft, Send, AlertTriangle } from "lucide-react";
 import { api, errorMessage } from "../api/client.js";
+import { useSeo } from "../utils/useSeo.js";
 
 export default function Report() {
   const [form, setForm] = useState({ link: "", reason: "phishing", details: "" });
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  useSeo({
+    title: "Report a suspicious link",
+    description: "Report a Linkzy short link used for phishing, scams, malware or spam. We review every report.",
+    path: "/report",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { errorMessage } from "../api/client.js";
+import { useSeo } from "../utils/useSeo.js";
 
 export default function Register() {
   const { register } = useAuth();
@@ -21,6 +22,11 @@ export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  useSeo({
+    title: "Create a free account",
+    description: "Sign up free for Linkzy, the URL shortener made for India. 20 free short links a month with QR codes and click analytics. No credit card.",
+    path: "/register",
+  });
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
