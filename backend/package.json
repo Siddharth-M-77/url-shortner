@@ -1,0 +1,35 @@
+{
+  "name": "linkzy-backend",
+  "version": "1.0.0",
+  "description": "URL shortener + link-in-bio SaaS backend",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "dev:worker": "node --watch src/workers/clickWorker.js",
+    "start": "node src/server.js",
+    "worker": "node src/workers/clickWorker.js",
+    "razorpay:plans": "node scripts/createRazorpayPlans.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bullmq": "^5.34.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "ioredis": "^5.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.0",
+    "morgan": "^1.10.0",
+    "qrcode": "^1.5.4",
+    "razorpay": "^2.9.8",
+    "ua-parser-js": "^1.0.39",
+    "zod": "^3.24.1"
+  }
+}
