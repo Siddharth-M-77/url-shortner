@@ -31,6 +31,8 @@ export const env = {
   redisUrl: process.env.REDIS_URL,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  // Process click jobs inside the API process (default). false = use the standalone worker.
+  runClickWorker: process.env.RUN_CLICK_WORKER !== "false",
   safeBrowsingKey: process.env.SAFE_BROWSING_API_KEY || "",
   adminEmail: (process.env.ADMIN_EMAIL || "").toLowerCase(),
 
