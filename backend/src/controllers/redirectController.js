@@ -2,6 +2,7 @@ import { resolveLink } from "../services/linkService.js";
 import { enqueueClick, LOG_CLICKS } from "../queues/clickQueue.js";
 import { env } from "../config/env.js";
 import {
+  getClientIp,
   getCountry,
   detectSource,
   isBot,
@@ -33,6 +34,7 @@ export async function redirect(req, res) {
       userId: link.userId,
       referrer: detectSource(req),
       country: getCountry(req),
+      ip: getClientIp(req), // used by the worker for the location lookup, not stored
       at: Date.now(),
       ...parseUserAgent(ua),
     });

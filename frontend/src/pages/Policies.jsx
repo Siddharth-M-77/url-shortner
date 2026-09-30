@@ -88,7 +88,9 @@ export function Privacy() {
         <li><strong>Links you create:</strong> destination URLs, titles, and bio page content.</li>
         <li>
           <strong>Click data:</strong> when someone opens a short link we record the time, referring website, device
-          type, browser, operating system, and country. We do not store visitors' full IP addresses with click data.
+          type, browser, operating system, and approximate location (country, state and city). The location is worked
+          out from the visitor's IP address at the moment of the click; the IP address itself is not stored. Location
+          data comes from GeoLite2 by MaxMind (https://www.maxmind.com).
         </li>
         <li>
           <strong>Payment data:</strong> payments are processed by Razorpay. We receive payment ids, amount, status and

@@ -21,6 +21,23 @@ import BreakdownList from "../components/BreakdownList.jsx";
 import ShareTrackedLinks from "../components/ShareTrackedLinks.jsx";
 import Spinner from "../components/Spinner.jsx";
 
+// "IN" -> "India". Falls back to the code if the browser doesn't know it.
+const countryNames = typeof Intl.DisplayNames === "function" ? new Intl.DisplayNames(["en"], { type: "region" }) : null;
+function countryName(code) {
+  if (!code || code.toLowerCase() === "unknown") return "Unknown";
+  try {
+    return countryNames?.of(code.toUpperCase()) || code;
+  } catch {
+    return code;
+  }
+}
+
+// "Mumbai|Maharashtra|IN" -> "Mumbai, Maharashtra, India"
+function cityLabel(key = "") {
+  const [city, region, country] = key.split("|");
+  return [city, region, countryName(country)].filter(Boolean).join(", ");
+}
+
 const RANGES = [
   { label: "7 days", value: 7 },
   { label: "30 days", value: 30 },
@@ -238,12 +255,14 @@ export default function LinkStats() {
         )}
       </div>
 
-      {/* 4 Breakdown Cards */}
+      {/* Breakdown Cards */}
       <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
         <BreakdownList title="Top Traffic Sources" items={stats.referrers} />
+        <BreakdownList title="Top Countries" items={stats.countries} formatKey={countryName} />
+        <BreakdownList title="Top Cities" items={stats.cities || []} formatKey={cityLabel} />
         <BreakdownList title="Device Types" items={stats.devices} />
         <BreakdownList title="Web Browsers" items={stats.browsers} />
-        <BreakdownList title="Geographic Locations" items={stats.countries} />
+        <BreakdownList title="Operating Systems" items={stats.os || []} />
       </div>
     </div>
   );

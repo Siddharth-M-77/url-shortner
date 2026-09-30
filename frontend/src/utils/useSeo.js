@@ -1,7 +1,27 @@
 import { useEffect } from "react";
 
 const DEFAULT_TITLE = "Free URL Shortener for India – Short Links, QR Codes & Bio Pages | Linkzy";
-const SITE_URL = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, "");
+const SITE_URL = (
+  import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" ? window.location.origin : "")
+).replace(/\/$/, "");
+
+// During prerender (SSR) effects don't run, so the page's SEO values are collected here
+// and written into the static HTML by scripts/prerender.mjs.
+let ssrHead = null;
+export function takeSsrHead() {
+  const head = ssrHead;
+  ssrHead = null;
+  return head;
+}
+
+function headValues({ title, description, path, noindex }) {
+  return {
+    title: title ? `${title} | Linkzy` : DEFAULT_TITLE,
+    description,
+    url: path !== undefined ? `${SITE_URL}${path}` : undefined,
+    robots: noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
+  };
+}
 
 function setMeta(selector, attr, key, value) {
   let el = document.head.querySelector(selector);
@@ -15,6 +35,8 @@ function setMeta(selector, attr, key, value) {
 
 // Sets the page title, description, canonical URL and robots tag for the current route
 export function useSeo({ title, description, path, noindex = false } = {}) {
+  if (import.meta.env.SSR) ssrHead = headValues({ title, description, path, noindex });
+
   useEffect(() => {
     const fullTitle = title ? `${title} | Linkzy` : DEFAULT_TITLE;
     document.title = fullTitle;

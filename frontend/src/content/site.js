@@ -9,6 +9,10 @@ export const FALLBACK_PLANS = [
   { key: "pro", name: "Pro", price: 299, linksPerMonth: null, trackedClicksPerMonth: null, customAlias: true, removeBranding: true },
 ];
 
+// Public, indexable routes: listed in sitemap.xml and prerendered to static HTML at build.
+// Private app pages (dashboard, billing...) stay out of both.
+export const PUBLIC_ROUTES = ["/", "/register", "/login", "/terms", "/privacy", "/refund", "/contact", "/report"];
+
 // The landing page hero hands a pasted URL to the dashboard's create form through this key
 export const PENDING_URL_KEY = "linkzy:pendingUrl";
 

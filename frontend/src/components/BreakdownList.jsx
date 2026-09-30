@@ -34,14 +34,16 @@ function getItemIcon(key = "", title = "") {
     return Globe;
   }
 
-  if (t.includes("country")) {
+  if (t.includes("countr") || t.includes("cit") || t.includes("location")) {
     return MapPin;
   }
+  if (t.includes("operating")) return Laptop;
 
   return Compass;
 }
 
-export default function BreakdownList({ title, items = [] }) {
+// formatKey turns a raw key ("IN", "Mumbai|Maharashtra|IN") into display text
+export default function BreakdownList({ title, items = [], formatKey }) {
   const total = items.reduce((acc, cur) => acc + (cur.count || 0), 0);
   const max = Math.max(1, ...items.map((i) => i.count));
 
@@ -72,7 +74,9 @@ export default function BreakdownList({ title, items = [] }) {
                   <div className="flex items-center justify-between gap-3 text-xs">
                     <span className="flex min-w-0 items-center gap-1.5 font-medium text-slate-700 capitalize">
                       <Icon className="h-3.5 w-3.5 flex-shrink-0 text-slate-400" />
-                      <span className="truncate">{item.key || "Direct / Unknown"}</span>
+                      <span className="truncate" title={formatKey ? formatKey(item.key) : item.key}>
+                        {(formatKey ? formatKey(item.key) : item.key) || "Direct / Unknown"}
+                      </span>
                     </span>
                     <div className="flex flex-shrink-0 items-center gap-2">
                       <span className="font-bold text-slate-900">

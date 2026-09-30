@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
 import Layout from "./components/Layout.jsx";
@@ -6,14 +7,17 @@ import { useSeo } from "./utils/useSeo.js";
 import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import LinkStats from "./pages/LinkStats.jsx";
-import BioEditor from "./pages/BioEditor.jsx";
-import PublicBio from "./pages/PublicBio.jsx";
 import Report from "./pages/Report.jsx";
-import Admin from "./pages/Admin.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import Billing from "./pages/Billing.jsx";
+
+// Private pages (and their heavy deps like recharts) load only when opened,
+// so the public landing page stays small and fast.
+const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
+const LinkStats = lazy(() => import("./pages/LinkStats.jsx"));
+const BioEditor = lazy(() => import("./pages/BioEditor.jsx"));
+const Billing = lazy(() => import("./pages/Billing.jsx"));
+const Admin = lazy(() => import("./pages/Admin.jsx"));
+const PublicBio = lazy(() => import("./pages/PublicBio.jsx"));
 import { Terms, Privacy, Refund, Contact } from "./pages/Policies.jsx";
 
 // Redirects to login when there is no session
@@ -24,21 +28,28 @@ function Protected({ children, admin = false }) {
   if (loading) return <Spinner full />;
   if (!user) return <Navigate to="/login" replace />;
   if (admin && user.role !== "admin") return <Navigate to="/dashboard" replace />;
-  return children;
+  return <Suspense fallback={<Spinner full />}>{children}</Suspense>;
 }
 
-// Keeps logged-in users away from login/register pages
+// Keeps logged-in users away from login/register pages. The form shows right away
+// (it is prerendered for SEO); a signed-in user is redirected once the session check ends.
 function GuestOnly({ children }) {
   const { user, loading } = useAuth();
-  if (loading) return <Spinner full />;
-  return user ? <Navigate to="/dashboard" replace /> : children;
+  return !loading && user ? <Navigate to="/dashboard" replace /> : children;
 }
 
 export default function App() {
   return (
     <Routes>
       {/* Public bio page has its own full-screen design, no app layout */}
-      <Route path="/u/:username" element={<PublicBio />} />
+      <Route
+        path="/u/:username"
+        element={
+          <Suspense fallback={<Spinner full />}>
+            <PublicBio />
+          </Suspense>
+        }
+      />
 
       <Route element={<Layout />}>
         <Route path="/" element={<Landing />} />

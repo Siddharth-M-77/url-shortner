@@ -247,7 +247,7 @@ export default function Landing() {
                   <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
                 </div>
-                <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-white px-3 py-1 text-[11px] font-medium text-slate-400 ring-1 ring-slate-200/80">
+                <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-white px-3 py-1 text-[11px] font-medium text-slate-500 ring-1 ring-slate-200/80">
                   <ShieldCheck className="h-3 w-3 flex-shrink-0 text-emerald-500" />
                   <span className="truncate">linkzy.in/dashboard</span>
                 </div>
@@ -256,8 +256,8 @@ export default function Landing() {
               <div className="grid gap-4 p-4 sm:p-6 md:grid-cols-5">
                 {/* Link + chart */}
                 <div className="min-w-0 space-y-4 md:col-span-3">
-                  <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 font-mono text-[11px] text-slate-400">
-                    <p className="truncate">https://myshop.in/collections/festive/products/anarkali-suit?utm_source=insta</p>
+                  <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 font-mono text-[11px] text-slate-500">
+                    <p className="truncate text-slate-500">https://myshop.in/collections/festive/products/anarkali-suit?utm_source=insta</p>
                   </div>
 
                   <div className="flex items-center justify-between gap-2 rounded-xl border border-brand-200 bg-gradient-to-r from-brand-50 to-violet-50 px-3 py-3 sm:px-4">
@@ -278,7 +278,7 @@ export default function Landing() {
                   <div className="rounded-xl border border-slate-200 p-4">
                     <div className="flex items-end justify-between">
                       <div>
-                        <p className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">Clicks · 14 days</p>
+                        <p className="text-[11px] font-semibold tracking-wider text-slate-500 uppercase">Clicks · 14 days</p>
                         <p className="mt-1 font-display text-2xl font-extrabold text-slate-900">4,892</p>
                       </div>
                       <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700">+34%</span>
@@ -290,7 +290,7 @@ export default function Landing() {
                 {/* Sources + QR */}
                 <div className="grid min-w-0 grid-cols-2 gap-4 md:col-span-2 md:grid-cols-1">
                   <div className="rounded-xl border border-slate-200 p-4">
-                    <p className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">Top sources</p>
+                    <p className="text-[11px] font-semibold tracking-wider text-slate-500 uppercase">Top sources</p>
                     <ul className="mt-3 space-y-2.5">
                       {[
                         { label: "WhatsApp", pct: 68, icon: WhatsAppIcon, color: "bg-emerald-500" },
@@ -417,19 +417,19 @@ export default function Landing() {
               </p>
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 sm:col-span-2">
-                  <p className="text-[11px] font-semibold tracking-wider text-slate-500 uppercase">Clicks</p>
+                  <p className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase">Clicks</p>
                   <Sparkline className="mt-2 h-24 w-full" stroke="#a5b4fc" />
                 </div>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-1">
                   <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
                     <Smartphone className="h-4 w-4 text-sky-300" />
                     <p className="mt-2 font-display text-xl font-bold text-white">82%</p>
-                    <p className="text-[11px] text-slate-500">on mobile</p>
+                    <p className="text-[11px] text-slate-400">on mobile</p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
                     <WhatsAppIcon className="h-4 w-4 text-emerald-300" />
                     <p className="mt-2 font-display text-xl font-bold text-white">68%</p>
-                    <p className="text-[11px] text-slate-500">from WhatsApp</p>
+                    <p className="text-[11px] text-slate-400">from WhatsApp</p>
                   </div>
                 </div>
               </div>
@@ -464,7 +464,7 @@ export default function Landing() {
                 <div className="mx-auto h-9 w-9 rounded-full bg-white/30 ring-2 ring-white/40" />
                 <div className="mx-auto mt-2 h-1.5 w-16 rounded-full bg-white/60" />
                 <div className="mt-3 space-y-1.5">
-                  <div className="flex h-5 items-center justify-center gap-1 rounded-md bg-[#25D366] text-[8px] font-bold text-white">
+                  <div className="flex h-5 items-center justify-center gap-1 rounded-md bg-[#0b7a3b] text-[8px] font-bold text-white">
                     <WhatsAppIcon className="h-2.5 w-2.5" /> Chat on WhatsApp
                   </div>
                   <div className="h-5 rounded-md bg-white/25" />
@@ -481,7 +481,7 @@ export default function Landing() {
               <h3 className="mt-4 text-lg font-bold text-white">Custom short links</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-400">Pick your own ending so people know what they're clicking.</p>
               <div className="mt-6 space-y-2 font-mono text-xs">
-                <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2.5 text-slate-500 line-through decoration-rose-400/70">
+                <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-900/60 px-3 py-2.5 text-slate-400 line-through decoration-rose-400/70">
                   <X className="h-3.5 w-3.5 flex-shrink-0 text-rose-400" />
                   <span className="truncate">linkzy.in/x7Kq2</span>
                 </div>
@@ -502,9 +502,9 @@ export default function Landing() {
                 Update where a link goes, pause it or set an expiry. Your printed QR keeps working.
               </p>
               <div className="mt-6 flex items-center gap-2 text-xs">
-                <span className="rounded-lg bg-slate-800 px-2.5 py-1.5 font-semibold text-slate-300">Active</span>
-                <span className="rounded-lg bg-slate-800 px-2.5 py-1.5 font-semibold text-slate-500">Paused</span>
-                <span className="rounded-lg bg-slate-800 px-2.5 py-1.5 font-semibold text-slate-500">Expires 30d</span>
+                <span className="rounded-lg bg-emerald-500/15 px-2.5 py-1.5 font-semibold text-emerald-300">Active</span>
+                <span className="rounded-lg bg-slate-800 px-2.5 py-1.5 font-semibold text-slate-300">Paused</span>
+                <span className="rounded-lg bg-slate-800 px-2.5 py-1.5 font-semibold text-slate-300">Expires 30d</span>
               </div>
             </article>
           </div>
@@ -578,7 +578,10 @@ export default function Landing() {
 
                 <ul className="mt-6 flex-1 space-y-3 text-sm">
                   {features.map((f) => (
-                    <li key={f.text} className={`flex items-start gap-2.5 ${f.on ? "" : "opacity-45"}`}>
+                    <li
+                      key={f.text}
+                      className={`flex items-start gap-2.5 ${f.on ? "" : featured ? "text-slate-400" : "text-slate-500"}`}
+                    >
                       {f.on ? (
                         <CheckCircle2 className={`mt-0.5 h-4 w-4 flex-shrink-0 ${featured ? "text-brand-300" : "text-emerald-500"}`} />
                       ) : (

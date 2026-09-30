@@ -55,7 +55,7 @@ export default function Layout() {
               <span className="font-display text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors">
                 Linkzy<span className="text-brand-600">.</span>
               </span>
-              <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-slate-400 sm:block -mt-1">
+              <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-slate-500 sm:block -mt-1">
                 India's Bio & Link OS
               </span>
             </div>
@@ -274,20 +274,20 @@ export default function Layout() {
               <Link to="/contact" className="hover:text-brand-600 transition-colors">
                 Contact Us
               </Link>
-              <Link to="/report" className="text-rose-600 hover:text-rose-700 transition-colors">
+              <Link to="/report" className="text-rose-700 hover:text-rose-800 transition-colors">
                 Report Abuse
               </Link>
             </div>
           </div>
 
-          <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-slate-100 pt-6 text-center text-xs text-slate-400 sm:flex-row sm:text-left">
+          <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-slate-100 pt-6 text-center text-xs text-slate-500 sm:flex-row sm:text-left">
             <p>© {new Date().getFullYear()} {BUSINESS.legalName}. All rights reserved.</p>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
               <span className="flex items-center gap-1.5 text-slate-500">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
                 Bank-Grade 256-bit SSL
               </span>
-              <span className="text-slate-300">•</span>
+              <span aria-hidden="true" className="text-slate-300">•</span>
               <span className="flex items-center gap-1.5 text-slate-500">
                 <Zap className="h-3.5 w-3.5 text-amber-500 fill-amber-500" />
                 Razorpay Verified

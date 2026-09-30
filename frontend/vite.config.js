@@ -1,10 +1,7 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { FAQS, FALLBACK_PLANS } from "./src/content/site.js";
-
-// Public, indexable routes. Private app pages (dashboard, billing...) stay out of the sitemap.
-const PUBLIC_ROUTES = ["/", "/register", "/login", "/terms", "/privacy", "/refund", "/contact", "/report"];
+import { FAQS, FALLBACK_PLANS, PUBLIC_ROUTES } from "./src/content/site.js";
 
 // Writes robots.txt and sitemap.xml into the build using VITE_SITE_URL
 function seoFiles(siteUrl) {
@@ -12,6 +9,7 @@ function seoFiles(siteUrl) {
     name: "linkzy-seo-files",
     apply: "build",
     generateBundle() {
+      if (this.environment?.config?.build?.ssr) return; // only for the client build
       const today = new Date().toISOString().slice(0, 10);
       const urls = PUBLIC_ROUTES.map(
         (path) =>

@@ -7,13 +7,14 @@ import { Link } from "../models/Link.js";
 import { Click } from "../models/Click.js";
 import { User } from "../models/User.js";
 import { consumeClickQuota } from "../middlewares/quota.js";
+import { lookupLocation } from "../utils/requestInfo.js";
 
 // Needs MongoDB to be connected first. Returns the BullMQ worker so callers can close it.
 export function startClickWorker() {
   const worker = new Worker(
     CLICK_QUEUE,
     async (job) => {
-      const { code, linkId, userId, referrer, device, browser, os, country, at } = job.data;
+      const { code, linkId, userId, referrer, device, browser, os, country, ip, at } = job.data;
       const tag = `[click-worker] job ${job.id} /${code || "?"}`;
 
       // Total click counter is always updated (users always see the total)
@@ -45,6 +46,7 @@ export function startClickWorker() {
         return;
       }
 
+      const location = await lookupLocation(ip);
       await Click.create({
         link: linkId,
         user: userId,
@@ -52,9 +54,16 @@ export function startClickWorker() {
         device,
         browser,
         os,
-        country,
+        // A CDN country header (if any) wins over the IP lookup
+        country: country || location.country,
+        region: location.region,
+        city: location.city,
         createdAt: new Date(at),
       });
+      if (LOG_CLICKS) {
+        const place = [location.city, location.region, country || location.country].filter(Boolean).join(", ");
+        console.log(`${tag}: location ${place || "unknown"}`);
+      }
     },
     { connection: createQueueConnection(), concurrency: 25 }
   );

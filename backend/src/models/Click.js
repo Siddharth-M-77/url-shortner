@@ -9,7 +9,9 @@ const clickSchema = new mongoose.Schema({
   device: { type: String, default: "desktop" }, // mobile | tablet | desktop
   browser: { type: String, default: "unknown" },
   os: { type: String, default: "unknown" },
-  country: { type: String, default: "unknown" },
+  country: { type: String, default: "unknown" }, // ISO code, e.g. "IN"
+  region: { type: String, default: "" }, // state / region name, e.g. "Maharashtra"
+  city: { type: String, default: "" },
 });
 
 clickSchema.index({ link: 1, createdAt: -1 });
